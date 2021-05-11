@@ -1,0 +1,22 @@
+entity Produto {
+	id Long,
+    nome String,
+    modelo String,
+    categoria String,
+    marca String    
+}
+
+entity Intencao {
+	id Long,
+    descricao String,
+    valorEstimado BigDecimal,
+    data LocalDate
+}
+
+relationship OneToOne {
+	Intencao{produto} to Produto
+}
+
+paginate Intencao with pagination
+
+service all with serviceImpl
