@@ -1,0 +1,40 @@
+{
+  "name": "Intencao",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "descricao",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "valorEstimado",
+      "fieldType": "BigDecimal"
+    },
+    {
+      "fieldName": "data",
+      "fieldType": "LocalDate"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "produto",
+      "otherEntityRelationshipName": "intencao",
+      "relationshipName": "produto",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "intencao",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210512045344"
+}

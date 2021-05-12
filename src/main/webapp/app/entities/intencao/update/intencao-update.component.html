@@ -1,0 +1,85 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-intencao-heading" data-cy="IntencaoCreateUpdateHeading" jhiTranslate="arremateApp.intencao.home.createOrEditLabel">
+        Create or edit a Intencao
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="arremateApp.intencao.id" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="arremateApp.intencao.descricao" for="field_descricao">Descricao</label>
+          <input type="text" class="form-control" name="descricao" id="field_descricao" data-cy="descricao" formControlName="descricao" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="arremateApp.intencao.valorEstimado" for="field_valorEstimado"
+            >Valor Estimado</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="valorEstimado"
+            id="field_valorEstimado"
+            data-cy="valorEstimado"
+            formControlName="valorEstimado"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="arremateApp.intencao.data" for="field_data">Data</label>
+          <div class="input-group">
+            <input
+              id="field_data"
+              data-cy="data"
+              type="text"
+              class="form-control"
+              name="data"
+              ngbDatepicker
+              #dataDp="ngbDatepicker"
+              formControlName="data"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dataDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="arremateApp.intencao.produto" for="field_produto">Produto</label>
+          <select class="form-control" id="field_produto" data-cy="produto" name="produto" formControlName="produto">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="produtoOption.id === editForm.get('produto')!.value?.id ? editForm.get('produto')!.value : produtoOption"
+              *ngFor="let produtoOption of produtosCollection; trackBy: trackProdutoById"
+            >
+              {{ produtoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

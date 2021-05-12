@@ -1,0 +1,27 @@
+{
+  "arremateApp": {
+    "intencao": {
+      "home": {
+        "title": "Intencaos",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Intencao",
+        "createOrEditLabel": "Criar ou editar Intencao",
+        "notFound": "Nenhum Intencao encontrado"
+      },
+      "created": "Um novo Intencao foi criado com o identificador {{ param }}",
+      "updated": "Um Intencao foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Intencao foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Intencao {{ id }}?"
+      },
+      "detail": {
+        "title": "Intencao"
+      },
+      "id": "Id",
+      "descricao": "Descricao",
+      "valorEstimado": "Valor Estimado",
+      "data": "Data",
+      "produto": "Produto"
+    }
+  }
+}

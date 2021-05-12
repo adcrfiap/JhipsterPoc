@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="intencao">
+      <h2 data-cy="intencaoDetailsHeading"><span jhiTranslate="arremateApp.intencao.detail.title">Intencao</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="arremateApp.intencao.id">Id</span></dt>
+        <dd>
+          <span>{{ intencao.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.intencao.descricao">Descricao</span></dt>
+        <dd>
+          <span>{{ intencao.descricao }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.intencao.valorEstimado">Valor Estimado</span></dt>
+        <dd>
+          <span>{{ intencao.valorEstimado }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.intencao.data">Data</span></dt>
+        <dd>
+          <span>{{ intencao.data | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.intencao.produto">Produto</span></dt>
+        <dd>
+          <div *ngIf="intencao.produto">
+            <a [routerLink]="['/produto', intencao.produto?.id, 'view']">{{ intencao.produto?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/intencao', intencao.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

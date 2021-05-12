@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="produto">
+      <h2 data-cy="produtoDetailsHeading"><span jhiTranslate="arremateApp.produto.detail.title">Produto</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="arremateApp.produto.id">Id</span></dt>
+        <dd>
+          <span>{{ produto.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.produto.nome">Nome</span></dt>
+        <dd>
+          <span>{{ produto.nome }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.produto.modelo">Modelo</span></dt>
+        <dd>
+          <span>{{ produto.modelo }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.produto.categoria">Categoria</span></dt>
+        <dd>
+          <span>{{ produto.categoria }}</span>
+        </dd>
+        <dt><span jhiTranslate="arremateApp.produto.marca">Marca</span></dt>
+        <dd>
+          <span>{{ produto.marca }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/produto', produto.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

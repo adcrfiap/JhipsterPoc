@@ -1,0 +1,112 @@
+<div>
+  <h2 id="page-heading" data-cy="IntencaoHeading">
+    <span jhiTranslate="arremateApp.intencao.home.title">Intencaos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="arremateApp.intencao.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-intencao"
+        [routerLink]="['/intencao/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="arremateApp.intencao.home.createLabel"> Create a new Intencao </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="intencaos?.length === 0">
+    <span jhiTranslate="arremateApp.intencao.home.notFound">No intencaos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="intencaos && intencaos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span jhiTranslate="arremateApp.intencao.id">Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="descricao">
+            <span jhiTranslate="arremateApp.intencao.descricao">Descricao</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="valorEstimado">
+            <span jhiTranslate="arremateApp.intencao.valorEstimado">Valor Estimado</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="data"><span jhiTranslate="arremateApp.intencao.data">Data</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="produto.id">
+            <span jhiTranslate="arremateApp.intencao.produto">Produto</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let intencao of intencaos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/intencao', intencao.id, 'view']">{{ intencao.id }}</a>
+          </td>
+          <td>{{ intencao.descricao }}</td>
+          <td>{{ intencao.valorEstimado }}</td>
+          <td>{{ intencao.data | formatMediumDate }}</td>
+          <td>
+            <div *ngIf="intencao.produto">
+              <a [routerLink]="['/produto', intencao.produto?.id, 'view']">{{ intencao.produto?.id }}</a>
+            </div>
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/intencao', intencao.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/intencao', intencao.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(intencao)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="intencaos && intencaos.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
