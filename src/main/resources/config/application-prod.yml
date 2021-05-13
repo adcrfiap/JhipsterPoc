@@ -33,7 +33,7 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://db-arremate.cluster-cu4pjlznnrly.us-east-1.rds.amazonaws.com:5432/arremate
+    url: jdbc:postgresql://54.235.134.192:5432/arremate
     username: adcrfiap
     password: adcrfiap
     hikari:
